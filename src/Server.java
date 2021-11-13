@@ -39,7 +39,10 @@ public class Server {
                     ss.close();
                 }
                 catch(SocketException e){
-                    System.out.println("Client is down Excption is "+e.getMessage());
+                    if(e.getMessage().equals("Connection reset"))
+                        System.out.println("Client is down");
+                    else
+                        System.out.println("Network is down");
                     s.close();
                     ss.close();
                 }
@@ -61,7 +64,7 @@ public class Server {
                     }
                 }
                 catch(SocketTimeoutException ex){
-                    System.out.println("Netwwork is down");
+                    System.out.println("Network is down");
                     ds.close();
                 }
                 catch(SocketException e){
