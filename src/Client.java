@@ -33,10 +33,7 @@ public class Client {
                     s.close();
                 }
                 catch(SocketException e){
-                    if(e.getMessage().equals("Connection reset"))
-                        System.out.println("Server is down");
-                    else
-                        System.out.println("Network is down");
+                    System.out.println("Network is down");
                     s.close();
                 }
                 break;
@@ -56,15 +53,8 @@ public class Client {
                         Thread.sleep(Integer.parseInt(args[2]));
                     }
                 }
-                catch(SocketTimeoutException ex){
-                    System.out.println("Network is down");
-                    ds.close();
-                }
                 catch(SocketException e){
-                    if(e.getMessage().equals("Connection reset"))
-                        System.out.println("Server is down");
-                    else
-                        System.out.println("Network is down");
+                    System.out.println("Network is down");
                     ds.close();
                 }
                 break;
