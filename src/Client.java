@@ -17,20 +17,24 @@ public class Client {
         sc.close();
         switch(choice){
             case 1:
+                Socket s = new Socket();
                 try{
+                    s = new Socket(args[0],Integer.parseInt(args[1]));
+                    s.setSoTimeout(Integer.parseInt(args[3]));
                     while(true){
-                        Socket s = new Socket(args[0],Integer.parseInt(args[1]));
-                        s.setSoTimeout(Integer.parseInt(args[3]));
+                        s.getInputStream().read();
+                        s.getOutputStream().write("t".getBytes());
                         System.out.println(s.getInetAddress().toString()+" is connected");
-                        s.close();
                         Thread.sleep(Integer.parseInt(args[2]));
                     }
                 }
                 catch(SocketTimeoutException ex){
-                    System.out.println("Server is down");
+                    System.out.println("Netork is down");
+                    s.close();
                 }
                 catch(SocketException e){
-                    System.out.println("Network is down");
+                    System.out.println("Server is down Excption is "+e.getMessage());
+                    s.close();
                 }
                 break;
             case 2:
@@ -50,11 +54,11 @@ public class Client {
                     }
                 }
                 catch(SocketTimeoutException ex){
-                    System.out.println("Server is down");
+                    System.out.println("Netork is down");
                     ds.close();
                 }
                 catch(SocketException e){
-                    System.out.println("Network is down");
+                    System.out.println("Server is down Excption is "+e.getMessage());
                     ds.close();
                 }
                 break;

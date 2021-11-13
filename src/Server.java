@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -20,23 +21,26 @@ public class Server {
         switch(choice){
             case 1:
                 ServerSocket ss = new ServerSocket(Integer.parseInt(args[0]));//this wwaits for clietn connections
+                Socket s = new Socket();
                 try{
+                    ss.setSoTimeout(Integer.parseInt(args[2]));
+                    s = ss.accept();//we wait for only one client
+                    s.setSoTimeout(Integer.parseInt(args[2]));
                     while(true){
-                        ss.setSoTimeout(Integer.parseInt(args[2]));
-                        Socket s = ss.accept();//we wait for only one client
-                        s.setSoTimeout(Integer.parseInt(args[2]));
-                        s.close();
+                        s.getOutputStream().write("t".getBytes());
+                        s.getInputStream().read();
                         System.out.println(s.getInetAddress().toString()+" is connected");
                         Thread.sleep(Integer.parseInt(args[1]));
                     }
                 }
-                
                 catch(SocketTimeoutException ex){
-                    System.out.println("Client is down ");
+                    System.out.println("Network is down");
+                    s.close();
                     ss.close();
                 }
                 catch(SocketException e){
-                    System.out.println("Network is down");
+                    System.out.println("Client is down Excption is "+e.getMessage());
+                    s.close();
                     ss.close();
                 }
                 break;
@@ -57,11 +61,11 @@ public class Server {
                     }
                 }
                 catch(SocketTimeoutException ex){
-                    System.out.println("Client is down");
+                    System.out.println("Netwwork is down");
                     ds.close();
                 }
                 catch(SocketException e){
-                    System.out.println("Network is down");
+                    System.out.println("Client is down Excption is "+e.getMessage());
                     ds.close();
                 }
                 break;
