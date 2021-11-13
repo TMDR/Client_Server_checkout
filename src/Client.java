@@ -29,11 +29,14 @@ public class Client {
                     }
                 }
                 catch(SocketTimeoutException ex){
-                    System.out.println("Netork is down");
+                    System.out.println("Network is down");
                     s.close();
                 }
                 catch(SocketException e){
-                    System.out.println("Server is down Excption is "+e.getMessage());
+                    if(e.getMessage().equals("Connection reset"))
+                        System.out.println("Server is down");
+                    else
+                        System.out.println("Network is down");
                     s.close();
                 }
                 break;
@@ -54,11 +57,14 @@ public class Client {
                     }
                 }
                 catch(SocketTimeoutException ex){
-                    System.out.println("Netork is down");
+                    System.out.println("Network is down");
                     ds.close();
                 }
                 catch(SocketException e){
-                    System.out.println("Server is down Excption is "+e.getMessage());
+                    if(e.getMessage().equals("Connection reset"))
+                        System.out.println("Server is down");
+                    else
+                        System.out.println("Network is down");
                     ds.close();
                 }
                 break;

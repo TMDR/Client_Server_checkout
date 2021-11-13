@@ -1,4 +1,3 @@
-import java.io.PrintStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -68,7 +67,10 @@ public class Server {
                     ds.close();
                 }
                 catch(SocketException e){
-                    System.out.println("Client is down Excption is "+e.getMessage());
+                    if(e.getMessage().equals("Connection reset"))
+                        System.out.println("Client is down");
+                    else
+                        System.out.println("Network is down");
                     ds.close();
                 }
                 break;
