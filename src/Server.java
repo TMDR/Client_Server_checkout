@@ -11,7 +11,7 @@ public class Server {
     public static void main(String[] args) throws Exception {
         int choice = 1;Scanner sc;
         do{
-            System.out.println("You can choose between TCP and UDP but we advise you to choose TCP as it provides 3 way handshake and every paccket is ensured to be delivered. Press 1 for TCP and 2 for UDP");
+            System.out.println("You can choose between TCP and UDP but we advise you to choose TCP as it provides 3 way handshake and every packet is ensured to be delivered. Press 1 for TCP and 2 for UDP");
             sc = new Scanner(System.in);
             choice = sc.nextInt();
         }while(choice < 1 || choice > 2);
@@ -19,7 +19,7 @@ public class Server {
 
         switch(choice){
             case 1:
-                ServerSocket ss = new ServerSocket(Integer.parseInt(args[0]));//this wwaits for clietn connections
+                ServerSocket ss = new ServerSocket(Integer.parseInt(args[0]));//this waits for client connections
                 Socket s = new Socket();
                 try{
                     ss.setSoTimeout(Integer.parseInt(args[2]));
