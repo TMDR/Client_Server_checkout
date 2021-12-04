@@ -56,7 +56,7 @@ public class Client {
                         Thread.sleep(Integer.parseInt(args[2]));
                     }
                 }
-                catch(SocketException e){
+                catch(SocketException | SocketTimeoutException e){
                     System.out.println("Network is down");
                     ds.close();
                 }
