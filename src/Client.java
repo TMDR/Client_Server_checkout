@@ -34,7 +34,7 @@ public class Client {
                 }
                 catch(SocketException e){
                     if(e.getMessage().equals("Connection reset"))
-                        System.out.println("Server is down");
+                        System.out.println("Server is down"); 
                     else
                         System.out.println("Network is down");
                     s.close();
